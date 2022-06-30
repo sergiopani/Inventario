@@ -6,10 +6,24 @@ const app = new Vue({
     //Array de articulos que parseamos desde el fichero json
     articulos: [],
     articulosOk: [1, 2, 3, 4],
+    //
+
     //Atributos de los aticulos
     f: "",
     l: "",
     t: "",
+
+    //Checkeds
+    checked: `<div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">            
+          </label>
+        </div>`,
+    unchecked: `<div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">            
+            </label>
+            </div>`,
   },
   created() {
     this.getProducts();
@@ -42,7 +56,7 @@ const app = new Vue({
       }
       return "white-color";
     },
-    
+
     validateProduction(a) {
       if (a.fondo == "X" && a.lateral == "X" && a.tapa == "X") {
         console.log("Estoyyy aqui");
@@ -55,14 +69,42 @@ const app = new Vue({
     },
 
     //Devolemos si esta checheado con una okChecked
-    checkState:function(a){      
-      if(a.fondo == 'X'){
-      
-        return "flexCheckChecked";
+    checkStateF: function (a) {
+      if (a.fondo == "X") {
+        return this.checked;
+      } else {
+        return this.unchecked;
       }
-
     },
-    
+    checkStateL: function (a) {
+      if (a.lateral == "X") {
+        return this.checked;
+      } else {
+        return this.unchecked;
+      }
+    },
+    checkStateT: function (a) {
+      if (a.tapa == "X") {
+        return this.checked;
+      } else {
+        return this.unchecked;
+      }
+    },
+    showChecked: () => {
+      return `<div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+          <label class="form-check-label" for="flexCheckChecked">            
+          </label>
+        </div>`;
+    },
+
+    showUnChecked: () => {
+      return `<div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">            
+            </label>
+            </div>`;
+    },
     getProducts() {
       fetch("../data/result.json")
         .then((res) => res.json())

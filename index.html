@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,12 +11,19 @@
     <link rel="stylesheet" href="scss/custom.css">
     <!--Libreria para iconos de Bootstrap(Por si es necesario)-->
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
     <!--Documento personal de CSS-->
     <link rel="stylesheet" href="./css/mycss.css">
     <!--Añadir el CDN de VUE a nuestro proyecto-->
     <script src="https://unpkg.com/vue@next"></script>
 </head>
+
 <body id="app">
+
     <!--Header STATICO (PA 28819)    
         CLASES:
         Text Light: Coloca color blanco al texto
@@ -23,12 +31,32 @@
         ps-3: Coloca un padding de 3 px al text en la izquierda
         py-1: Coloca un padding en el ejey de 1px; es decir arriba y abajo
     -->
-    <header class="text-light bg-primary ps-3 py-1 ">
-        <h1><span>(PA 28819) 00001 Star Quads SL</span></h1>
-    </header>
+    <header class="bg-primary">
+        <div class="row col-12">
+            <!-- Example single danger button -->
+            <div class="btn-group col-1 py-2 mx-1">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Opciones
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
 
+            <div class="text-light ps-3 my-auto col-10">
+                <h1><span>(PA 28819) 00001 Star Quads SL</span></h1>
+            </div>
+        </div>
+    </header>
     <!--Contenedor Inventario-->
-    <div class="mx-1" >       
+    <div class="mx-1">
         <!--GRUPO HORIZONTAL ESTATICO con la clasificacion del inventario-->
         <div class="header">
             <ul class="list-group list-group-horizontal col-12 ">
@@ -42,47 +70,39 @@
         </div>
         <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
         <div class="scrolled">
-            <ul v-for="a in articulos":key="1" class="list-group list-group-horizontal col-12">                                                                                            
+            <ul v-for="a in articulos" :key="1" class="list-group list-group-horizontal col-12">
                 <li class="list-group-item col-3 {{getColor(a)}}">{{a.serie + '/' + a.numero}}</li>
                 <li class="list-group-item col-4 {{getColor(a)}}">{{a.denoart}}</li>
-                <li class="list-group-item col-2 {{getColor(a)}}">{{a.cantidad}}</li>                
+                <li class="list-group-item col-2 {{getColor(a)}}">{{a.cantidad}}</li>
                 <li class="list-group-item col-1 {{getColor(a)}}">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"></label>
-                </div>   
+                    <div v-html="checkStateF(a)"></div>
                 </li>
                 <li class="list-group-item col-1 {{getColor(a)}}">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault"></label>
-                </div>
+                    <div v-html="checkStateL(a)"></div>
                 </li>
                 <li class="list-group-item col-1 {{getColor(a)}}">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" v-bind:id="{{checkState(a)}}">
-                    <label class="form-check-label" v-bind:for="{{checkState(a)}}"></label>
-                </div>
-                </li> 
-                                    
-            </ul>            
+                    <div v-html="checkStateT(a)"></div>
+                </li>
+
+            </ul>
         </div>
     </div>
 
     <footer class="mx-1">
-        <div class="text-center p-4 py-2" style="background-color: rgba(0, 0, 0, 0.05);">            
+        <div class="text-center p-4 py-2" style="background-color: rgba(0, 0, 0, 0.05);">
             <button type="button" class="btn btn-primary" v-on:click="checkProduction()">Enviar a producción</button>
         </div>
     </footer>
 
-    <!--Vinculacion de JQuery, JS-->
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <!--Vinculacion de JQuery, JS-->    
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <!--Vinculacion de VUEJS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <!--Cargo mi Javascript-->
     <script src="./scripts/index.js" type="module"></script>
-    
+
 
 </body>
+
 </html>
