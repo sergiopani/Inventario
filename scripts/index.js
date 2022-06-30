@@ -5,11 +5,8 @@ const app = new Vue({
   data: {
     //Array de articulos que parseamos desde el fichero json
     articulos: [],
-    //Succes equivale al color verde
-    color: "success",
-    //Contador que nos dice en que posicion del array se encuentra cada producto
-    cont: 0,
-    //Atributos de los aticulos    
+    articulosOk: [1, 2, 3, 4],
+    //Atributos de los aticulos
     f: "",
     l: "",
     t: "",
@@ -38,19 +35,45 @@ const app = new Vue({
         x.style.display = "none";
       }
     },
-
-    pushCurrentProduct: function (a) {
-      //console.log(this.productos.indexOf(a,0));          
-      console.log(a);          
-      this.of += this.articulos[id].serie + " " + this.articulos[id].numero;
-      this.articulo += this.articulos[id].denoart;
-      this.cantidad += this.articulos[id].cantidad;
-      this.f += this.articulos[id].fondo;
-      this.l += this.articulos[id].lateral;
-      this.t += this.articulos[id].tapa;
+    getColor: function (a) {
+      if (a.fondo == "X" && a.lateral == "X" && a.tapa == "X") {
+        //Se puede enviar a produccion ya que EL fondo el lateral y la tapa estan OK
+        return "green-color";
+      }
+      return "white-color";
     },
     
-    /*METODOS DE FUNCIONALIDADES*/
+    validateProduction(a) {
+      if (a.fondo == "X" && a.lateral == "X" && a.tapa == "X") {
+        console.log("Estoyyy aqui");
+        //Se puede enviar a produccion ya que EL fondo el lateral y la tapa estan OK
+        this.articulosOk.push(a);
+      }
+    },
+    checkProduction: function () {
+      console.log(this.articulosOk);
+    },
+
+    //Devolemos si esta checheado con una okChecked
+    checkState:function(a){      
+      if(a.fondo == 'X'){
+      
+        return "flexCheckChecked";
+      }
+
+    },
+    
+    getProducts() {
+      fetch("../data/result.json")
+        .then((res) => res.json())
+        .then((data) => ((this.articulos = data), console.log(this.articulos)))
+        .catch((err) => console.log(err.message));
+    },
+  },
+});
+
+
+/*METODOS DE GETTERS*/
 
     /*
          getProductos() {
@@ -65,11 +88,3 @@ const app = new Vue({
          },
        },
        */
-    getProducts() {
-      fetch("../data/result.json")
-        .then((res) => res.json())
-        .then((data) => ((this.articulos = data), console.log(this.articulos)))
-        .catch((err) => console.log(err.message));
-    },
-  },
-});

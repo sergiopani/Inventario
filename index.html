@@ -10,45 +10,70 @@
     <link rel="stylesheet" href="scss/custom.css">
     <!--Libreria para iconos de Bootstrap(Por si es necesario)-->
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <!--Documento personal de CSS-->
+    <link rel="stylesheet" href="./css/mycss.css">
+    <!--Añadir el CDN de VUE a nuestro proyecto-->
+    <script src="https://unpkg.com/vue@next"></script>
 </head>
-<body>
-    <!--Header STATICO (PA 28819)-->
-    <!--
+<body id="app">
+    <!--Header STATICO (PA 28819)    
         CLASES:
         Text Light: Coloca color blanco al texto
         bg-primary: Coloca color azul a todo el div
         ps-3: Coloca un padding de 3 px al text en la izquierda
         py-1: Coloca un padding en el ejey de 1px; es decir arriba y abajo
     -->
-    <div class="text-light bg-primary ps-3 py-1 ">
+    <header class="text-light bg-primary ps-3 py-1 ">
         <h1><span>(PA 28819) 00001 Star Quads SL</span></h1>
-    </div>
+    </header>
 
     <!--Contenedor Inventario-->
-    <div id="app" class="mx-1">       
+    <div class="mx-1" >       
         <!--GRUPO HORIZONTAL ESTATICO con la clasificacion del inventario-->
-        <ul class="list-group list-group-horizontal col-12">
-            <li class="list-group-item col-3 py-0"><strong>OF</strong></li>
-            <li class="list-group-item col-4 py-0"><strong>Artículo</strong></li>
-            <li class="list-group-item col-2 py-0"><strong>Cant</strong></li>
-            <li class="list-group-item col-1 py-0"><strong>F</strong></li>
-            <li class="list-group-item col-1 py-0"><strong>L</strong></li>
-            <li class="list-group-item col-1 py-0"><strong>T</strong></li>
-        </ul>
-        <!--GRUPO NO ESTATICO DE GENERACION DE OBJETOS-->
-        <ul v-for="a in articulos":key="1" class="list-group list-group-horizontal col-12">
-                     
-            <li class="list-group-item col-3 ">{{a.serie + '/' + a.numero}} </li>
-            <li class="list-group-item col-4 ">{{a.denoart}}</li>
-            <li class="list-group-item col-2 ">{{a.cantidad}}</li>
-            <li class="list-group-item col-1 ">{{a.fondo}}</li>
-            <li class="list-group-item col-1 ">{{a.lateral}}</li>
-            <li class="list-group-item col-1 ">{{a.tapa}}</li>
-            
-            
-        </ul>
-
+        <div class="header">
+            <ul class="list-group list-group-horizontal col-12 ">
+                <li class="list-group-item col-3 py-0"><strong>OF</strong></li>
+                <li class="list-group-item col-4 py-0"><strong>Artículo</strong></li>
+                <li class="list-group-item col-2 py-0"><strong>Cant</strong></li>
+                <li class="list-group-item col-1 py-0"><strong>F</strong></li>
+                <li class="list-group-item col-1 py-0"><strong>L</strong></li>
+                <li class="list-group-item col-1 py-0"><strong>T</strong></li>
+            </ul>
+        </div>
+        <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
+        <div class="scrolled">
+            <ul v-for="a in articulos":key="1" class="list-group list-group-horizontal col-12">                                                                                            
+                <li class="list-group-item col-3 {{getColor(a)}}">{{a.serie + '/' + a.numero}}</li>
+                <li class="list-group-item col-4 {{getColor(a)}}">{{a.denoart}}</li>
+                <li class="list-group-item col-2 {{getColor(a)}}">{{a.cantidad}}</li>                
+                <li class="list-group-item col-1 {{getColor(a)}}">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+                </div>   
+                </li>
+                <li class="list-group-item col-1 {{getColor(a)}}">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault"></label>
+                </div>
+                </li>
+                <li class="list-group-item col-1 {{getColor(a)}}">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" v-bind:id="{{checkState(a)}}">
+                    <label class="form-check-label" v-bind:for="{{checkState(a)}}"></label>
+                </div>
+                </li> 
+                                    
+            </ul>            
+        </div>
     </div>
+
+    <footer class="mx-1">
+        <div class="text-center p-4 py-2" style="background-color: rgba(0, 0, 0, 0.05);">            
+            <button type="button" class="btn btn-primary" v-on:click="checkProduction()">Enviar a producción</button>
+        </div>
+    </footer>
 
     <!--Vinculacion de JQuery, JS-->
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>

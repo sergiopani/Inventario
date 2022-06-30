@@ -1,0 +1,27 @@
+html,body{
+    height: 100vh;
+}
+
+.scrolled{
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.scrolled-hidden{
+    overflow:hidden;
+}
+
+.footer{
+    position:absolute;
+    bottom: 0;
+}
+
+.green-color{
+    background-color: #00ff00;
+}
+
+.white-color{
+    background-color: white;
+}
