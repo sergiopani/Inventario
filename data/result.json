@@ -1,0 +1,38 @@
+[
+    {
+        "centro": "0",
+        "tipo": 16,
+        "serie": "PCO",
+        "numero": 9,
+        "codiart": "LA21100X100X100",
+        "cantidad": 1,
+        "denoart": "Bolsa LA21: 100 X 100 X 100 cm CT",
+        "fondo": "X",
+        "lateral": "X",
+        "tapa": "X"
+    },
+    {
+        "centro": "0",
+        "tipo": 16,
+        "serie": "PCO",
+        "numero": 10,
+        "codiart": "LA21100X100X102",
+        "cantidad": 1,
+        "denoart": "Bolsa LA21: 100 X 100 X 102 cm CT",
+        "fondo": "X",
+        "lateral": "X",
+        "tapa": "X"
+    },
+    {
+        "centro": "0",
+        "tipo": 16,
+        "serie": "PCO",
+        "numero": 11,
+        "codiart": "LA21100X100X110",
+        "cantidad": 1,
+        "denoart": "Bolsa LA21: 100 X 100 X 110 cm CT",
+        "fondo": "X",
+        "lateral": "X",
+        "tapa": "X"
+    }
+]
