@@ -6,10 +6,8 @@ html,body{
 }
 
 .scrolled{
-    height: 100vh;
     overflow: scroll;
     overflow-x: hidden;
-    scrollbar-width: none;
 }
 
 .scrolled-hidden{

@@ -35,44 +35,15 @@
     <header class="bg-primary">
 
         <div class="container-fluid">
-            <h1 class="navbar-brand bg-primary text-light col-12 col-lg-12 ps-2 rounded-3" href="#">{{currentEmpresa}}</h1>
-            <!--                
-                <button class="navbar-toggler bg-secondary w-100 pb-2" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="text-white">Opciones</span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-                        <li class="nav-item ">
-                            <a class="nav-link active" value="GET" aria-current="page" href="#">GET</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" value="POST" href="#">POST</a>
-                        </li>
+            {{setDefaultEmpresa(empresas[0].nomfiscli)}}
+            <h1 class="navbar-brand  bg-primary text-uppercase text-light col-12 col-lg-12  rounded-3" href="#">{{currentEmpresa}}</h1>
+            <form class="pb-2">
+                <select class="form-select bg-light text-center w-100 text-uppercase" name="empresas" id="empresas" v-model="currentEmpresa">
 
-                        <li class="nav-item">
-                            <a class="nav-link" value="OTROS">OTROS</a>
-                        </li>
-                    </ul>
+                    <option v-for="e in empresas" :key="e" value={{e.nomfiscli}}>
+                        {{e.nomfiscli}}
+                    </option>
 
-
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">
-                            Buscar
-                        </button>
-                    </form>
-                </div>
-                -->
-
-
-            <form>
-                <select class="w-100 text-center text-uppercase mb-2" name="cars" id="cars" style="height: 40px;">                   
-                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
-                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
-                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
-                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
                 </select>
             </form>
         </div>

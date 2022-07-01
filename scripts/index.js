@@ -5,27 +5,16 @@ const app = new Vue({
   data: {
     //Array de articulos que parseamos desde el fichero json
     articulos: [],
-    articulosOk: [],
     //Array del fetch de json de empresas
     empresas: [],
-    currentEmpresa: "(PA 28819) 00001 Star Quads SL",
+    //Por defecto primero va a tener la primera empresa de la array
+    currentEmpresa: "",
     //Atributos de los aticulos
     f: "",
     l: "",
     t: "",
-
-    //Checkeds
-    checked: `<div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">            
-          </label>
-        </div>`,
-    unchecked: `<div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">            
-            </label>
-            </div>`,
   },
+  /*Metodos que se ejecutan al iniciar la pagina*/
   created() {
     this.getProducts();
     this.getEmpresas();
@@ -58,7 +47,9 @@ const app = new Vue({
       }
       return "white-color";
     },
-
+    setDefaultEmpresa:function (e){
+      this.currentEmpresa = e;
+    },
     validateProduction(a) {
       if (a.fondo == "X" && a.lateral == "X" && a.tapa == "X") {
         console.log("Estoyyy aqui");
@@ -67,23 +58,23 @@ const app = new Vue({
       }
     },
     checkProduction: function () {
-      console.log(this.articulosOk);
+
     },
 
     //Devolemos si esta checheado con una okChecked
     checkStateF: function (a) {
       if (a.fondo == "X") {
-        return this.unchecked;
+        return this.showUnChecked();
       }
     },
     checkStateL: function (a) {
       if (a.lateral == "X") {
-        return this.unchecked;
+        return this.showUnChecked();
       }
     },
     checkStateT: function (a) {
       if (a.tapa == "X") {
-        return this.unchecked;
+        return this.showUnChecked();
       }
     },
     showChecked: () => {
