@@ -2,28 +2,29 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Titulo de la pagina-->
     <title>Detalle Ordenes[PA28819]</title>
     <!--Libreria Personalizada de Bootstrap-->
-    <link rel="stylesheet" href="scss/custom.css">
+    <link rel="stylesheet" href="scss/custom.css" />
     <!--Libreria para iconos de Bootstrap(Por si es necesario)-->
-    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css" />
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
     <!--Documento personal de CSS-->
-    <link rel="stylesheet" href="./css/mycss.css">
+    <link rel="stylesheet" href="./css/mycss.css" />
     <!--Añadir el CDN de VUE a nuestro proyecto-->
     <script src="https://unpkg.com/vue@next"></script>
 </head>
 
 <body id="app">
-
     <!--Header STATICO (PA 28819)    
         CLASES:
         Text Light: Coloca color blanco al texto
@@ -32,34 +33,55 @@
         py-1: Coloca un padding en el ejey de 1px; es decir arriba y abajo
     -->
     <header class="bg-primary">
-        <div class="row col-12">
-            <!-- Example single danger button -->
-            <div class="btn-group col-1 py-2 mx-1">
-                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Opciones
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-            </div>
 
-            <div class="text-light ps-3 my-auto col-10">
-                <h1><span>(PA 28819) 00001 Star Quads SL</span></h1>
-            </div>
+        <div class="container-fluid">
+            <h1 class="navbar-brand bg-primary text-light col-12 col-lg-12 ps-2 rounded-3" href="#">{{currentEmpresa}}</h1>
+            <!--                
+                <button class="navbar-toggler bg-secondary w-100 pb-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="text-white">Opciones</span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+                        <li class="nav-item ">
+                            <a class="nav-link active" value="GET" aria-current="page" href="#">GET</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" value="POST" href="#">POST</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" value="OTROS">OTROS</a>
+                        </li>
+                    </ul>
+
+
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-outline-success" type="submit">
+                            Buscar
+                        </button>
+                    </form>
+                </div>
+                -->
+
+
+            <form>
+                <select class="w-100 text-center text-uppercase mb-2" name="cars" id="cars" style="height: 40px;">                   
+                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
+                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
+                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
+                    <option v-model:value="currentEmpresa">{{currentEmpresa}}</option>
+                </select>
+            </form>
         </div>
     </header>
     <!--Contenedor Inventario-->
     <div class="mx-1">
         <!--GRUPO HORIZONTAL ESTATICO con la clasificacion del inventario-->
         <div class="header">
-            <ul class="list-group list-group-horizontal col-12 ">
+            <ul class="list-group list-group-horizontal col-12">
                 <li class="list-group-item col-3 py-0"><strong>OF</strong></li>
                 <li class="list-group-item col-4 py-0"><strong>Artículo</strong></li>
                 <li class="list-group-item col-2 py-0"><strong>Cant</strong></li>
@@ -70,8 +92,10 @@
         </div>
         <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
         <div class="scrolled">
-            <ul v-for="a in articulos" :key="1" class="list-group list-group-horizontal col-12">
-                <li class="list-group-item col-3 {{getColor(a)}}">{{a.serie + '/' + a.numero}}</li>
+            <ul v-for="a in articulos" :key="a" class="list-group list-group-horizontal col-12">
+                <li class="list-group-item col-3 {{getColor(a)}}">
+                    {{a.serie + '/' + a.numero}}
+                </li>
                 <li class="list-group-item col-4 {{getColor(a)}}">{{a.denoart}}</li>
                 <li class="list-group-item col-2 {{getColor(a)}}">{{a.cantidad}}</li>
                 <li class="list-group-item col-1 {{getColor(a)}}">
@@ -83,26 +107,25 @@
                 <li class="list-group-item col-1 {{getColor(a)}}">
                     <div v-html="checkStateT(a)"></div>
                 </li>
-
             </ul>
         </div>
     </div>
 
     <footer class="mx-1">
-        <div class="text-center p-4 py-2" style="background-color: rgba(0, 0, 0, 0.05);">
-            <button type="button" class="btn btn-primary" v-on:click="checkProduction()">Enviar a producción</button>
+        <div class="text-center p-4 py-2" style="background-color: rgba(0, 0, 0, 0.05)">
+            <button type="button" class="btn btn-primary" v-on:click="checkProduction()">
+                Enviar a producción
+            </button>
         </div>
     </footer>
 
-    <!--Vinculacion de JQuery, JS-->    
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--Vinculacion de JQuery, JS-->
+    <!--<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <!--Vinculacion de VUEJS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <!--Cargo mi Javascript-->
     <script src="./scripts/index.js" type="module"></script>
-
-
 </body>
 
 </html>

@@ -1,13 +1,12 @@
 html,body{
     height: 100vh;
     margin:0;
-    padding: 0;
-    position:relative;
-    min-height: 100vh;
+    padding: 0;    
+    
 }
 
 .scrolled{
-    height: 500px;
+    height: 100vh;
     overflow: scroll;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -18,7 +17,7 @@ html,body{
 }
 
 .footer{
-    position:absolute;
+    position:fixed;
     bottom: 0;
 }
 

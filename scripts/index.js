@@ -5,9 +5,10 @@ const app = new Vue({
   data: {
     //Array de articulos que parseamos desde el fichero json
     articulos: [],
-    articulosOk: [1, 2, 3, 4],
-    //
-
+    articulosOk: [],
+    //Array del fetch de json de empresas
+    empresas: [],
+    currentEmpresa: "(PA 28819) 00001 Star Quads SL",
     //Atributos de los aticulos
     f: "",
     l: "",
@@ -27,6 +28,7 @@ const app = new Vue({
   },
   created() {
     this.getProducts();
+    this.getEmpresas();
   },
   methods: {
     /* METODOS DE MODAL
@@ -71,22 +73,16 @@ const app = new Vue({
     //Devolemos si esta checheado con una okChecked
     checkStateF: function (a) {
       if (a.fondo == "X") {
-        return this.checked;
-      } else {
         return this.unchecked;
       }
     },
     checkStateL: function (a) {
       if (a.lateral == "X") {
-        return this.checked;
-      } else {
         return this.unchecked;
       }
     },
     checkStateT: function (a) {
       if (a.tapa == "X") {
-        return this.checked;
-      } else {
         return this.unchecked;
       }
     },
@@ -111,22 +107,28 @@ const app = new Vue({
         .then((data) => ((this.articulos = data), console.log(this.articulos)))
         .catch((err) => console.log(err.message));
     },
+    getEmpresas() {
+      fetch("../data/empresas.json")
+        .then((res) => res.json())
+        .then((data) => ((this.empresas = data), console.log(this.empresas)))
+        .catch((err) => console.log(err.message));
+    },
   },
 });
 
 
 /*METODOS DE GETTERS*/
 
-    /*
-         getProductos() {
-           fetch("/products")
-             .then((res) => res.json())
-             .then((data) => {
-               console.log(data);
-               this.productos = data.productos;
-               console.log(this.productos);
-             })
-             .catch((err) => console.log(err.message));
-         },
-       },
-       */
+/*
+     getProductos() {
+       fetch("/products")
+         .then((res) => res.json())
+         .then((data) => {
+           console.log(data);
+           this.productos = data.productos;
+           console.log(this.productos);
+         })
+         .catch((err) => console.log(err.message));
+     },
+   },
+   */
