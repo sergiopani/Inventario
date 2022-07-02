@@ -8,7 +8,9 @@ const app = new Vue({
     //Array del fetch de json de empresas
     empresas: [],
     //Por defecto primero va a tener la primera empresa de la array
-    currentEmpresa: "",
+    currentEmpresa: {},
+    currentENombre:"",
+    currentESerie:"",
     //Atributos de los aticulos
     f: "",
     l: "",
@@ -22,7 +24,7 @@ const app = new Vue({
   methods: {
     /* METODOS DE MODAL
      */
-    abrirModal: function (actualPosition) {
+    openModal: function (actualPosition) {
       //Pasamos la posicion actual del array
       this.actualPosition = actualPosition;
       var x = document.getElementById("modale");
@@ -32,12 +34,21 @@ const app = new Vue({
         x.style.display = "none";
       }
     },
-    cerrarModal: function () {
+    closeModal: function () {
       var x = document.getElementById("modale");
       if (x.style.display != "block") {
         x.style.display = "block";
       } else {
         x.style.display = "none";
+      }
+    },
+    setSerieByName:function(name){
+      this.currentESerie = name;
+    },
+    filter:function(a){
+
+      if(a.serie.toUpperCase() === this.currentESerie.toUpperCase()){
+        return a;
       }
     },
     getColor: function (a) {
@@ -47,15 +58,13 @@ const app = new Vue({
       }
       return "white-color";
     },
-    setDefaultEmpresa:function (e){
+    setDefault:function (e){
       this.currentEmpresa = e;
+      this.currentENombre = e.nomfiscli;
+      this.currentESerie = e.serie;
     },
-    validateProduction(a) {
-      if (a.fondo == "X" && a.lateral == "X" && a.tapa == "X") {
-        console.log("Estoyyy aqui");
-        //Se puede enviar a produccion ya que EL fondo el lateral y la tapa estan OK
-        this.articulosOk.push(a);
-      }
+    setCurrentSerie:function (s){
+      console.log("la serie clicada es: " + s.serie);
     },
     checkProduction: function () {
 
