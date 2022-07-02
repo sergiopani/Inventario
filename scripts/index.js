@@ -5,16 +5,20 @@ const app = new Vue({
   data: {
     //Array de articulos que parseamos desde el fichero json
     articulos: [],
+    articulosProducir:[],
     //Array del fetch de json de empresas
     empresas: [],
+
     //Por defecto primero va a tener la primera empresa de la array
     currentEmpresa: {},
     currentENombre:"",
     currentESerie:"",
+
     //Atributos de los aticulos
-    f: "",
-    l: "",
-    t: "",
+    fondos:[],
+    laterales:[],
+    tapas:[],
+
   },
   /*Metodos que se ejecutan al iniciar la pagina*/
   created() {
@@ -22,24 +26,18 @@ const app = new Vue({
     this.getEmpresas();
   },
   methods: {
-    /* METODOS DE MODAL
-     */
-    openModal: function (actualPosition) {
-      //Pasamos la posicion actual del array
-      this.actualPosition = actualPosition;
-      var x = document.getElementById("modale");
-      if (x.style.display != "block") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
-    },
-    closeModal: function () {
-      var x = document.getElementById("modale");
-      if (x.style.display != "block") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
+    comprobar:function (index){
+      console.log(this.fondos[0])
+      if(this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === true){
+        return true;
+      }else if(this.fondos[index] === undefined && this.laterales[index] === true && this.tapas[index] === true){
+        return true;
+      }else if(this.fondos[index] === undefined && this.laterales[index] === undefined && this.tapas[index] === true){
+        return true;
+      }else if(this.fondos[index] === true && this.laterales[index] === undefined && this.tapas[index] === undefined){
+        return true;
+      }else if(this.fondos[index] === undefined && this.laterales[index] === true && this.tapas[index] === undefined){
+        return true;
       }
     },
     setSerieByName:function(name){
@@ -51,56 +49,40 @@ const app = new Vue({
         return a;
       }
     },
-    getColor: function (a) {
-      if (a.fondo == "X" && a.lateral == "X" && a.tapa == "X") {
-        //Se puede enviar a produccion ya que EL fondo el lateral y la tapa estan OK
-        return "green-color";
-      }
-      return "white-color";
-    },
+
     setDefault:function (e){
       this.currentEmpresa = e;
       this.currentENombre = e.nomfiscli;
       this.currentESerie = e.serie;
     },
-    setCurrentSerie:function (s){
-      console.log("la serie clicada es: " + s.serie);
-    },
-    checkProduction: function () {
-
-    },
-
     //Devolemos si esta checheado con una okChecked
-    checkStateF: function (a) {
-      if (a.fondo == "X") {
+    /*
+    printStateF: function (a) {
+      if (a.fondo === "X") {
         return this.showUnChecked();
-      }
-    },
-    checkStateL: function (a) {
-      if (a.lateral == "X") {
-        return this.showUnChecked();
-      }
-    },
-    checkStateT: function (a) {
-      if (a.tapa == "X") {
-        return this.showUnChecked();
-      }
-    },
-    showChecked: () => {
-      return `<div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-          <label class="form-check-label" for="flexCheckChecked">            
-          </label>
-        </div>`;
-    },
 
+      }
+    },
+    printStateL: function (a) {
+      if (a.lateral === "X") {
+        return this.showUnChecked();
+      }
+    },
+    printStateT: function (a) {
+      if (a.tapa === "X") {
+        return this.showUnChecked();
+      }
+    },
     showUnChecked: () => {
       return `<div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input"  type="checkbox" value="accepted" unchecked-value="not_accepted" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">            
             </label>
-            </div>`;
+            </div>
+            `;
     },
+    */
+
     getProducts() {
       fetch("../data/result.json")
         .then((res) => res.json())

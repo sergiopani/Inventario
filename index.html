@@ -57,21 +57,41 @@
             </ul>
         </div>
         <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
-        <div class="scrolled">
-            <ul v-if="filter(a)" v-for="a in articulos" :key="a" class="list-group list-group-horizontal col-12">
-                    <li class="list-group-item col-3 {{getColor(a)}}">
+        <div>
+            <ul v-if="filter(a)" v-for="a in articulos" :key="`$index`" class="list-group list-group-horizontal col-12">
+
+                    <li class="list-group-item col-3" v-bind:class="{'green-color': comprobar($index)}">
                         {{a.serie + '/' + a.numero}}
                     </li>
-                    <li class="list-group-item col-4 {{getColor(a)}}">{{a.denoart}}</li>
-                    <li class="list-group-item col-2 {{getColor(a)}}">{{a.cantidad}}</li>
-                    <li class="list-group-item col-1 {{getColor(a)}}">
-                        <div v-html="checkStateF(a)"></div>
+                    <li class="list-group-item col-4" v-bind:class="{'green-color': comprobar($index)}">{{a.denoart}}</li>
+                    <li class="list-group-item col-2" v-bind:class="{'green-color': comprobar($index)}">{{a.cantidad}}</li>
+                    <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
+                        <div v-if="a.fondo === 'X'" class="form-check" >
+                            <input  class="form-check-input" v-model="fondos[$index]" type="checkbox" value="false" id="check1">
+                            <label class="form-check-label" for="check1">
+                                {{fondos[$index]}}
+                            </label>
+                        </div>
+                        <div v-else>{{fondos[$index] = undefined}}</div>
                     </li>
-                    <li class="list-group-item col-1 {{getColor(a)}}">
-                        <div v-html="checkStateL(a)"></div>
+                    <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
+
+                        <div v-if="a.lateral === 'X'" class="form-check">
+                        <input class="form-check-input"  v-model="laterales[$index]" type="checkbox" value="false" id="check2">
+                        <label class="form-check-label" for="check2">
+                            {{laterales[$index]}}
+                        </label>
+                        </div>
+                        <div v-else>{{fondos[$index] = undefined}}</div>
                     </li>
-                    <li class="list-group-item col-1 {{getColor(a)}}">
-                        <div v-html="checkStateT(a)"></div>
+                    <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
+                        <div v-if="a.tapa === 'X'" class="form-check">
+                            <input class="form-check-input"  v-model="tapas[$index]" type="checkbox" value="false"  id="check3">
+                            <label class="form-check-label" for="check3">
+                                {{tapas[$index]}}
+                            </label>
+                        </div>
+                        <div v-else>{{fondos[$index] = undefined}}</div>
                     </li>
 
             </ul>
