@@ -29,16 +29,16 @@
 
     <div class="container-fluid">
         <!--La empresa por default-->
-        {{setDefault(empresas[0])}}
+        {{ setDefault(empresas[0]) }}
 
         <h1 class="navbar-brand  bg-primary text-uppercase text-light col-12 col-lg-12  rounded-3" href="#">
-            {{currentENombre}}</h1>
+            {{ currentENombre }}</h1>
         <form class="pb-2">
             <select class="form-select bg-light text-center w-100 text-uppercase" name="empresas" id="empresas"
                     v-model="currentENombre">
 
                 <option v-for="e in empresas" :key="e" value={{e.nomfiscli}} v-on:click="setSerieByName(e.serie)">
-                    {{e.nomfiscli}}
+                    {{ e.nomfiscli }}
                 </option>
 
             </select>
@@ -61,18 +61,20 @@
     <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
     <div>
         <ul v-if="filter(a)" v-for="a in articulos" :key="`$index`" class="list-group list-group-horizontal col-12">
-
-            <li class="list-group-item col-3" v-bind:class="{'green-color': comprobar($index)}">
-                {{a.serie + '/' + a.numero}}
+            <li v-if="comprobar($index) === true">
+                {{ sendProduction(a, $index) }}
             </li>
-            <li class="list-group-item col-4" v-bind:class="{'green-color': comprobar($index)}">{{a.denoart}}</li>
-            <li class="list-group-item col-2" v-bind:class="{'green-color': comprobar($index)}">{{a.cantidad}}</li>
+            <li class="list-group-item col-3" v-bind:class="{'green-color': comprobar($index)}">
+                {{ a.serie + '/' + a.numero }}
+            </li>
+            <li class="list-group-item col-4" v-bind:class="{'green-color': comprobar($index)}">{{ a.denoart }}</li>
+            <li class="list-group-item col-2" v-bind:class="{'green-color': comprobar($index)}">{{ a.cantidad }}</li>
             <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
                 <div v-if="a.fondo === 'X'" class="form-check">
                     <input class="form-check-input" v-model="fondos[$index]" type="checkbox" value="false" id="check1">
                     <label class="form-check-label" for="check1"></label>
                 </div>
-                <div v-else>{{fondos[$index] = 'none'}}</div>
+                <div v-else>{{ fondos[$index] = '' }}</div>
             </li>
             <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
                 <div v-if="a.lateral === 'X'" class="form-check">
@@ -80,14 +82,14 @@
                            id="check2">
                     <label class="form-check-label" for="check2"></label>
                 </div>
-                <div v-else>{{laterales[$index] = 'none'}}</div>
+                <div v-else>{{ laterales[$index] = '' }}</div>
             </li>
             <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
                 <div v-if="a.tapa === 'X'" class="form-check">
                     <input class="form-check-input" v-model="tapas[$index]" type="checkbox" value="false" id="check3">
                     <label class="form-check-label" for="check3"></label>
                 </div>
-                <div v-else>{{tapas[$index] = 'none'}}</div>
+                <div v-else>{{ tapas[$index] = '' }}</div>
             </li>
 
         </ul>
@@ -113,8 +115,12 @@
                 <p><strong>Seguro que quieres enviar a la produccion?</strong></p>
             </div>
             <div class="modal-footer col-12">
-                <button type="button" class="btn btn-secondary col-6 mx-0 " data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary col-6 mx-0">Enviar</button>
+                <button type="button" class="btn btn-secondary col-6 mx-0 border border-light" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+                <button type="button" class="btn btn-primary col-6 mx-0 border border-light"
+                        v-on:click="showProduction();">Enviar
+                </button>
             </div>
         </div>
     </div>

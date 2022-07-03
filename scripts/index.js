@@ -5,7 +5,7 @@ const app = new Vue({
     data: {
         //Array de articulos que parseamos desde el fichero json
         articulos: [],
-        articulosProducir: [],
+        toProduce: [],
         //Array del fetch de json de empresas
         empresas: [],
 
@@ -27,28 +27,38 @@ const app = new Vue({
     },
     methods: {
         comprobar: function (index) {
-            console.log(this.fondos[index])
-            console.log(this.laterales[index])
-            console.log(this.tapas[index])
             if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === true) {
                 return true;
-            } else if (this.fondos[index] === 'none' && this.laterales[index] === 'none' && this.tapas[index] === true) {
+            } else if (this.fondos[index] === '' && this.laterales[index] === '' && this.tapas[index] === true) {
                 return true;
-            } else if (this.fondos[index] === true && this.laterales[index] === 'none' && this.tapas[index] === 'none') {
+            } else if (this.fondos[index] === true && this.laterales[index] === '' && this.tapas[index] === '') {
                 return true;
-            } else if (this.fondos[index] === 'none' && this.laterales[index] === true && this.tapas[index] === 'none') {
+            } else if (this.fondos[index] === '' && this.laterales[index] === true && this.tapas[index] === '') {
                 return true;
-            } else if (this.fondos[index] === true && this.laterales[index] === 'none' && this.tapas[index] === true) {
+            } else if (this.fondos[index] === true && this.laterales[index] === '' && this.tapas[index] === true) {
                 return true;
-            } else if (this.fondos[index] === 'none' && this.laterales[index] === true && this.tapas[index] === true) {
+            } else if (this.fondos[index] === '' && this.laterales[index] === true && this.tapas[index] === true) {
                 return true;
-            } else if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === 'none') {
+            } else if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === '') {
                 return true;
             }
 
         },
-        sendProduction: function () {
+        sendProduction: function (product, index) {
+            this.toProduce[index] = product;
+        },
+        validateProduction: function () {
+            for (let i = 0; i < this.toProduce.length; i++) {
+                if (this.toProduce[i] === null) {
+                    console.log('eliminando')
+                    //Elimina el objeto porque se ha deselecionado y ya no pasa el filtro
+                    this.toProduce.splice(i, 1);
+                }
+            }
 
+        },
+        showProduction: function () {
+            console.log(this.toProduce);
         },
         setSerieByName: function (name) {
             this.currentESerie = name;
@@ -65,34 +75,6 @@ const app = new Vue({
             this.currentENombre = e.nomfiscli;
             this.currentESerie = e.serie;
         },
-        //Devolemos si esta checheado con una okChecked
-        /*
-        printStateF: function (a) {
-          if (a.fondo === "X") {
-            return this.showUnChecked();
-
-          }
-        },
-        printStateL: function (a) {
-          if (a.lateral === "X") {
-            return this.showUnChecked();
-          }
-        },
-        printStateT: function (a) {
-          if (a.tapa === "X") {
-            return this.showUnChecked();
-          }
-        },
-        showUnChecked: () => {
-          return `<div class="form-check">
-                <input class="form-check-input"  type="checkbox" value="accepted" unchecked-value="not_accepted" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                </label>
-                </div>
-                `;
-        },
-        */
-
         getProducts() {
             fetch("../data/result.json")
                 .then((res) => res.json())
