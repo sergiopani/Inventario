@@ -11,10 +11,11 @@ const app = new Vue({
 
         //Objeto que guarda la empresa que esta selecionada en el select
         currentEmpresa: {
-            nombre:'',
-            serie:'',
-            tipo:'',
-            centro:''
+            nombre: '',
+            serie: '',
+            tipo: '',
+            centro: '',
+            numero: ''
         },
 
         //Atributos de los aticulos
@@ -29,39 +30,39 @@ const app = new Vue({
         this.getEmpresas();
     },
     methods: {
-        comprobar: function (index,a) {
+        comprobar: function (index, a) {
             if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === true) {
-                this.sendProduction(index,a);
+                this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === '' && this.laterales[index] === '' && this.tapas[index] === true) {
-                this.sendProduction(index,a);
+                this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === true && this.laterales[index] === '' && this.tapas[index] === '') {
                 this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === '' && this.laterales[index] === true && this.tapas[index] === '') {
-                this.sendProduction(index,a);
+                this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === true && this.laterales[index] === '' && this.tapas[index] === true) {
-                this.sendProduction(index,a);
+                this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === '' && this.laterales[index] === true && this.tapas[index] === true) {
-                this.sendProduction(index,a);
+                this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === '') {
-                this.sendProduction(index,a);
+                this.sendProduction(index, a);
                 return true;
-            }else{
-                this.deleteProduct(index,a);
+            } else {
+                this.deleteProduct(index, a);
             }
 
         },
-        sendProduction:function(index,a) {
+        sendProduction: function (index, a) {
             //Comprueba que elementos li estan marcados en verde
             this.toProduce[index] = (a);
         },
-        deleteProduct:function(index){
-          this.toProduce[index] = null;
+        deleteProduct: function (index) {
+            this.toProduce[index] = null;
         },
         showProduction: function () {
             //Eliminar las posiciones que son nulas
@@ -76,19 +77,29 @@ const app = new Vue({
             //Recorremos el array mirando que empresa tiene el nombre del parametro y hacemos un set del serie
             this.empresas.forEach(empresa => {
                 for (let key in empresa) {
-                    if(key === 'nomfiscli' && empresa[key] === nombre){
+                    if (key === 'nomfiscli' && empresa[key] === nombre) {
                         this.currentEmpresa.serie = empresa['serie'];
+                        this.currentEmpresa.tipo = empresa['tipo'];
+                        this.currentEmpresa.centro = empresa['centro'];
+                        this.currentEmpresa.numero = empresa['numero'];
                     }
                 }
             });
             console.log(this.currentEmpresa.serie)
         },
         filter: function (a) {
-            return a.serie.toUpperCase() === this.currentEmpresa.serie.toUpperCase();
+            /*console.log(a.serie + " "+ a.tipo + " " + a.centro + " es igual a ->" + this.currentEmpresa.serie + " " + this.currentEmpresa.tipo + " " + this.currentEmpresa.centro)
+            console.log()*/
+            return a.serie.toUpperCase() === this.currentEmpresa.serie.toUpperCase() &&
+                a.tipo === this.currentEmpresa.tipo &&
+                a.centro === this.currentEmpresa.centro;
         },
         setDefault: function (e) {
             this.currentEmpresa.nombre = e.nomfiscli;
             this.currentEmpresa.serie = e.serie;
+            this.currentEmpresa.tipo = e.tipo;
+            this.currentEmpresa.centro = e.centro;
+            this.currentEmpresa.numero = e.numero;
         },
         getProducts() {
             fetch("../data/result.json")
