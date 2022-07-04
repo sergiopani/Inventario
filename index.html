@@ -61,22 +61,19 @@
     <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
     <div>
         <ul v-if="filter(a)" v-for="a in articulos" :key="`$index`" class="list-group list-group-horizontal col-12">
-            <li v-if="comprobar($index) === true">
-                {{ sendProduction(a, $index) }}
-            </li>
-            <li class="list-group-item col-3" v-bind:class="{'green-color': comprobar($index)}">
+            <li class="list-group-item col-3" v-bind:class="{'green-color': comprobar($index,a)}">
                 {{ a.serie + '/' + a.numero }}
             </li>
-            <li class="list-group-item col-4" v-bind:class="{'green-color': comprobar($index)}">{{ a.denoart }}</li>
-            <li class="list-group-item col-2" v-bind:class="{'green-color': comprobar($index)}">{{ a.cantidad }}</li>
-            <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
+            <li class="list-group-item col-4" v-bind:class="{'green-color': comprobar($index,a)}">{{ a.denoart }}</li>
+            <li class="list-group-item col-2" v-bind:class="{'green-color': comprobar($index,a)}">{{ a.cantidad }}</li>
+            <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index,a)}">
                 <div v-if="a.fondo === 'X'" class="form-check">
                     <input class="form-check-input" v-model="fondos[$index]" type="checkbox" value="false" id="check1">
                     <label class="form-check-label" for="check1"></label>
                 </div>
                 <div v-else>{{ fondos[$index] = '' }}</div>
             </li>
-            <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
+            <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index,a)}">
                 <div v-if="a.lateral === 'X'" class="form-check">
                     <input class="form-check-input" v-model="laterales[$index]" type="checkbox" value="false"
                            id="check2">
@@ -84,7 +81,7 @@
                 </div>
                 <div v-else>{{ laterales[$index] = '' }}</div>
             </li>
-            <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index)}">
+            <li class="list-group-item col-1" v-bind:class="{'green-color': comprobar($index,a)}">
                 <div v-if="a.tapa === 'X'" class="form-check">
                     <input class="form-check-input" v-model="tapas[$index]" type="checkbox" value="false" id="check3">
                     <label class="form-check-label" for="check3"></label>

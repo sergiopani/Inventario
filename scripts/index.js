@@ -26,39 +26,47 @@ const app = new Vue({
         this.getEmpresas();
     },
     methods: {
-        comprobar: function (index) {
+        comprobar: function (index,a) {
             if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === true) {
+                this.sendProduction(index,a);
                 return true;
             } else if (this.fondos[index] === '' && this.laterales[index] === '' && this.tapas[index] === true) {
+                this.sendProduction(index,a);
                 return true;
             } else if (this.fondos[index] === true && this.laterales[index] === '' && this.tapas[index] === '') {
+                this.sendProduction(index, a);
                 return true;
             } else if (this.fondos[index] === '' && this.laterales[index] === true && this.tapas[index] === '') {
+                this.sendProduction(index,a);
                 return true;
             } else if (this.fondos[index] === true && this.laterales[index] === '' && this.tapas[index] === true) {
+                this.sendProduction(index,a);
                 return true;
             } else if (this.fondos[index] === '' && this.laterales[index] === true && this.tapas[index] === true) {
+                this.sendProduction(index,a);
                 return true;
             } else if (this.fondos[index] === true && this.laterales[index] === true && this.tapas[index] === '') {
+                this.sendProduction(index,a);
                 return true;
+            }else{
+                this.deleteProduct(index,a);
             }
 
         },
-        sendProduction: function (product, index) {
-            this.toProduce[index] = product;
+        sendProduction:function(index,a) {
+            //Comprueba que elementos li estan marcados en verde
+            this.toProduce[index] = (a);
         },
-        validateProduction: function () {
-            for (let i = 0; i < this.toProduce.length; i++) {
-                if (this.toProduce[i] === null) {
-                    console.log('eliminando')
-                    //Elimina el objeto porque se ha deselecionado y ya no pasa el filtro
-                    this.toProduce.splice(i, 1);
-                }
-            }
-
+        deleteProduct:function(index){
+          this.toProduce[index] = null;
         },
         showProduction: function () {
-            console.log(this.toProduce);
+            //Eliminar las posiciones que son nulas
+            const results = this.toProduce.filter(element => {
+                return element !== null;
+            });
+
+            console.log(results);
         },
         setSerieByName: function (name) {
             this.currentESerie = name;
