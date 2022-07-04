@@ -32,12 +32,11 @@
         {{ setDefault(empresas[0]) }}
 
         <h1 class="navbar-brand  bg-primary text-uppercase text-light col-12 col-lg-12  rounded-3" href="#">
-            {{ currentENombre }}</h1>
+            {{ currentEmpresa.nombre }}</h1>
         <form class="pb-2">
             <select class="form-select bg-light text-center w-100 text-uppercase" name="empresas" id="empresas"
-                    v-model="currentENombre">
-
-                <option v-for="e in empresas" :key="e" value={{e.nomfiscli}} v-on:click="setSerieByName(e.serie)">
+                    v-model="currentEmpresa.nombre">
+                <option v-for="e in empresas" :key="e.serie" value={{e.nomfiscli}} v-on:click="setSerieByName(e.serie)">
                     {{ e.nomfiscli }}
                 </option>
 
@@ -60,7 +59,7 @@
     </div>
     <!--GRUPO NO ESTATICO DE GENERACION DE PRODUCTOS-->
     <div>
-        <ul v-if="filter(a)" v-for="a in articulos" :key="`$index`" class="list-group list-group-horizontal col-12">
+        <ul v-if="filter(a)" @onchange="" v-for="a in articulos" :key="`$index`" class="list-group list-group-horizontal col-12">
             <li class="list-group-item col-3" v-bind:class="{'green-color': comprobar($index,a)}">
                 {{ a.serie + '/' + a.numero }}
             </li>

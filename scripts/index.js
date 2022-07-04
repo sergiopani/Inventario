@@ -10,9 +10,10 @@ const app = new Vue({
         empresas: [],
 
         //Por defecto primero va a tener la primera empresa de la array
-        currentEmpresa: {},
-        currentENombre: "",
-        currentESerie: "",
+        currentEmpresa: {
+            nombre:'',
+            serie:'',
+        },
 
         //Atributos de los aticulos
         fondos: [],
@@ -68,20 +69,20 @@ const app = new Vue({
 
             console.log(results);
         },
-        setSerieByName: function (name) {
-            this.currentESerie = name;
+        setSerieByName: function (e) {
+
+            this.currentEmpresa.serie = e;
+
         },
         filter: function (a) {
 
-            if (a.serie.toUpperCase() === this.currentESerie.toUpperCase()) {
+            if (a.serie.toUpperCase() === this.currentEmpresa.serie.toUpperCase()) {
                 return a;
             }
         },
-
         setDefault: function (e) {
-            this.currentEmpresa = e;
-            this.currentENombre = e.nomfiscli;
-            this.currentESerie = e.serie;
+            this.currentEmpresa.nombre = e.nomfiscli;
+            this.currentEmpresa.serie = e.serie;
         },
         getProducts() {
             fetch("../data/result.json")
