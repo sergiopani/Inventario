@@ -9,10 +9,12 @@ const app = new Vue({
         //Array del fetch de json de empresas
         empresas: [],
 
-        //Por defecto primero va a tener la primera empresa de la array
+        //Objeto que guarda la empresa que esta selecionada en el select
         currentEmpresa: {
             nombre:'',
             serie:'',
+            tipo:'',
+            centro:''
         },
 
         //Atributos de los aticulos
@@ -69,16 +71,20 @@ const app = new Vue({
 
             console.log(results);
         },
-        setSerieByName: function (e) {
+        setSerieByName: function (nombre) {
 
-            this.currentEmpresa.serie = e;
-
+            //Recorremos el array mirando que empresa tiene el nombre del parametro y hacemos un set del serie
+            this.empresas.forEach(empresa => {
+                for (let key in empresa) {
+                    if(key === 'nomfiscli' && empresa[key] === nombre){
+                        this.currentEmpresa.serie = empresa['serie'];
+                    }
+                }
+            });
+            console.log(this.currentEmpresa.serie)
         },
         filter: function (a) {
-
-            if (a.serie.toUpperCase() === this.currentEmpresa.serie.toUpperCase()) {
-                return a;
-            }
+            return a.serie.toUpperCase() === this.currentEmpresa.serie.toUpperCase();
         },
         setDefault: function (e) {
             this.currentEmpresa.nombre = e.nomfiscli;
